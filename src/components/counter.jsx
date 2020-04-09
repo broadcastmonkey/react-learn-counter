@@ -27,7 +27,7 @@ class Counter extends Component {
     console.log("Counter - rendered");
     return (
       <React.Fragment>
-        <div classname="row">
+        <div className="row">
           <div className="col-2">
             <h4>Counter #{this.props.counter.id}</h4>
           </div>
