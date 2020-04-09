@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
+  constructor() {
+    super();
+    console.log("Counter - constructor");
+  }
+
+  componentDidMount() {
+    console.log("Counter - component did mount");
+  }
   render() {
     // console.log("props", this.props);
+    console.log("Counter - rendered");
     return (
       <div>
         <h4>Counter #{this.props.counter.id}</h4>

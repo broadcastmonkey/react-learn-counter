@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("component did mount");
+    console.log("App - component did mount");
     // ajax call
     //this.setState(// new data)
   }
@@ -51,6 +51,7 @@ class App extends Component {
     this.setState({ counters });
   };
   render() {
+    console.log("App - rendered");
     return (
       <React.Fragment>
         <NavBar
