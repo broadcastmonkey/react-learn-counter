@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import NavBar from "./components/navbar";
+import Counters from "./components/counters";
+import "./App.css";
+
+class App extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 4 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+    ],
+  };
+
+  handleReset = () => {
+    let counters = this.state.counters.map((c) => {
+      c.value = 0;
+      return c;
+    });
+    this.setState(counters);
+  };
+  handleDelete = (counterId) => {
+    console.log("deleted " + counterId);
+    this.setState({
+      counters: this.state.counters.filter(
+        (counter) => counter.id !== counterId
+      ),
+    });
+  };
+
+  handleIncrement = (counter) => {
+    console.log(counter);
+    const counters = [...this.state.counters]; // referencje zostaja stare do obiektow i w ten sposob modyfikowalibysmy bezposrednio sate CZEGO NIE WONO ZROBIC W REACT
+
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+
+    this.setState({ counters });
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar />
+        <main role="main" className="container">
+          <Counters
+            counters={this.state.counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrement}
+            onDelete={this.handleDelete}
+          />
+        </main>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
