@@ -41,12 +41,20 @@ class App extends Component {
   };
 
   handleIncrement = (counter) => {
-    console.log(counter);
     const counters = [...this.state.counters]; // referencje zostaja stare do obiektow i w ten sposob modyfikowalibysmy bezposrednio sate CZEGO NIE WONO ZROBIC W REACT
 
     const index = counters.indexOf(counter);
     counters[index] = { ...counter };
     counters[index].value++;
+
+    this.setState({ counters });
+  };
+  handleDecrement = (counter) => {
+    const counters = [...this.state.counters]; // referencje zostaja stare do obiektow i w ten sposob modyfikowalibysmy bezposrednio sate CZEGO NIE WONO ZROBIC W REACT
+
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    if (counters[index].value > 0) counters[index].value--;
 
     this.setState({ counters });
   };
@@ -57,11 +65,12 @@ class App extends Component {
         <NavBar
           totalCounters={this.state.counters.filter((c) => c.value > 0).length}
         />
-        <main role="main" className="container">
+        <main role="main">
           <Counters
             counters={this.state.counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
           />
         </main>
